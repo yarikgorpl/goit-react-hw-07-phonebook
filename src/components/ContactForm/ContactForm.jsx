@@ -8,7 +8,7 @@ import { addContact } from 'redux/operations';
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
-    number: '',
+    phone: '',
   });
 
   const handleInputChange = event => {
@@ -22,7 +22,7 @@ const ContactForm = () => {
   const reset = () => {
     setFormData({
       name: '',
-      number: '',
+      phone: '',
     });
   };
 
@@ -33,7 +33,7 @@ const ContactForm = () => {
     const form = event.target;
 
     const nameValue = form.elements.name.value;
-    const numberValue = form.elements.number.value;
+    const phoneValue = form.elements.phone.value;
     const existingContact = contacts.find(
       existingContact =>
         existingContact.name.toLowerCase() === nameValue.toLowerCase()
@@ -42,7 +42,7 @@ const ContactForm = () => {
     if (existingContact) {
       alert(`${nameValue} is already in contacts`);
     } else {
-      dispatch(addContact(nameValue, numberValue));
+      dispatch(addContact(nameValue, phoneValue));
       reset();
     }
   };
@@ -69,13 +69,13 @@ const ContactForm = () => {
         />
       </label>
       <label className={css.label}>
-        Number
+        Phone
         <input
           className={css.input}
           type="tel"
-          name="number"
-          value={formData.number}
-          placeholder="Enter contact number"
+          name="phone"
+          value={formData.phone}
+          placeholder="Enter contact phone"
           onChange={handleInputChange}
           pattern="^[0-9]+$"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
